@@ -1,0 +1,184 @@
+/* RESET SUAVE */
+.footer * {
+  box-sizing: border-box;
+}
+
+.footer {
+  width: 100%;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ========================= */
+/* CONTAINER PADRÃO */
+/* ========================= */
+
+.footer-top-container,
+.footer-bottom-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========================= */
+/* TOPO (LARANJA) */
+/* ========================= */
+
+.footer-top-container {
+  display: flex;
+  background-color: #d9952f;
+  color: #fff;
+  padding: 35px 0 15px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 60%;
+}
+
+/* ESQUERDA */
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.logo {
+  width: 210px;
+}
+
+.subtitle {
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* DIREITA */
+
+.footer-right {
+  justify-self: end;
+  max-width: 320px;
+}
+
+.footer-right h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-right p {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* TEXTO CENTRAL */
+
+.footer-note {
+  text-align: center;
+  font-size: 11px;
+  margin-top: 15px;
+  opacity: 0.85;
+}
+
+/* ========================= */
+/* PARTE PRETA */
+/* ========================= */
+
+.footer-bottom {
+  background-color: #0a0a0a;
+  border-top: 2px solid #2a2a2a;
+}
+
+.footer-bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: #ccc;
+  font-size: 12px;
+  width: 80%;
+}
+
+.footer-bottom span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ÍCONES */
+
+.footer-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #555;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s;
+  line-height: 10px;
+}
+
+.icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.icon:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.footer-bottom-container a {
+ color: #fff;
+ text-decoration: none; 
+}
+
+/* ========================= */
+/* RESPONSIVO */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    text-align: center;
+  }
+
+  .footer-left {
+    align-items: center;
+  }
+
+  .footer-right {
+    justify-self: center;
+  }
+
+  .divider {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+  }
+
+  .footer-bottom-container {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}

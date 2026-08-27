@@ -1,0 +1,28 @@
+.siaae-header ion-toolbar {
+	--background: var(--siaae-green-dark);
+	--color: white;
+	--min-height: 72px;
+	padding: 0 5vw;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 800; letter-spacing: .08em; }
+.brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: var(--siaae-green-dark); background: var(--siaae-yellow); font-size: 1.4rem; }
+.header-school { font-size: .82rem; opacity: .82; }
+.home-shell { max-width: 920px; margin: 0 auto; padding: clamp(28px, 6vw, 64px) 5vw 48px; }
+.welcome-block { max-width: 620px; }
+.eyebrow, .meal-label { margin: 0 0 12px; color: var(--siaae-green); font-size: .75rem; font-weight: 800; letter-spacing: .14em; }
+h1 { margin: 0; color: var(--siaae-green-dark); font-family: Georgia, serif; font-size: clamp(2.35rem, 6vw, 4.5rem); line-height: .98; }
+.intro { max-width: 520px; margin: 18px 0 0; color: #536057; font-size: 1.1rem; line-height: 1.55; }
+.menu-list { margin-top: 38px; }
+.menu-card { padding: clamp(24px, 4vw, 38px); border: 1px solid #dce7dd; border-radius: 20px; background: white; box-shadow: 0 16px 40px rgba(27, 74, 40, .08); }
+.menu-card-top { display: flex; justify-content: space-between; gap: 24px; }
+.menu-card h2 { margin: 0; color: #183d24; font-size: clamp(1.45rem, 3vw, 2.2rem); line-height: 1.15; }
+.date-badge { display: flex; align-items: center; gap: 7px; align-self: flex-start; padding: 9px 12px; border-radius: 999px; color: var(--siaae-green); background: #edf5ee; font-size: .82rem; font-weight: 700; white-space: nowrap; }
+.school-name { margin: 24px 0 5px; color: #263b2b; font-weight: 700; }
+.ingredients { margin: 0; color: #718075; font-size: .95rem; }
+.evaluate-button { --background: var(--siaae-green); --background-hover: var(--siaae-green-dark); --border-radius: 12px; margin-top: 28px; height: 54px; font-weight: 800; }
+.quick-actions { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 24px; }
+.quick-actions ion-button { --color: var(--siaae-green); margin: 0; font-weight: 700; }
+.quick-actions ion-icon { margin-right: 8px; }
+.loading { display: flex; align-items: center; gap: 10px; color: #536057; }
+@media (max-width: 520px) { .header-school { display: none; } .menu-card-top { display: block; } .date-badge { display: inline-flex; margin-top: 18px; } }
