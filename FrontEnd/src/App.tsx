@@ -3,6 +3,12 @@ import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import { AuthProvider } from './contexts/AuthContext';
+import Evaluate from './pages/Evaluate';
+import ThankYou from './pages/ThankYou';
+import Feedback from './pages/Feedback';
+import WeekMenu from './pages/WeekMenu';
+import AdminDashboard from './pages/AdminDashboard';
+import AccessibilityTools from './components/AccessibilityTools';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -44,10 +50,16 @@ const App: React.FC = () => (
           <Route exact path="/home">
             <Home />
           </Route>
+          <Route exact path="/avaliar/:menuId"><Evaluate /></Route>
+          <Route exact path="/obrigado"><ThankYou /></Route>
+          <Route exact path="/fale-com-nutricao"><Feedback /></Route>
+          <Route exact path="/cardapio-semana"><WeekMenu /></Route>
+          <Route exact path="/admin"><AdminDashboard /></Route>
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
+        <AccessibilityTools />
       </IonReactRouter>
     </IonApp>
   </AuthProvider>

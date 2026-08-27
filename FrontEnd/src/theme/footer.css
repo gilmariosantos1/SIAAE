@@ -25,7 +25,7 @@
 
 .footer-top-container {
   display: flex;
-  background-color: #d9952f;
+  background-color: var(--siaae-green-dark);
   color: #fff;
   padding: 35px 0 15px;
   flex-direction: column;
@@ -47,7 +47,7 @@
   gap: 8px;
 }
 
-.logo {
+.footer .logo {
   width: 210px;
 }
 
@@ -96,8 +96,8 @@
 /* ========================= */
 
 .footer-bottom {
-  background-color: #0a0a0a;
-  border-top: 2px solid #2a2a2a;
+  background-color: var(--siaae-green);
+  border-top: 2px solid var(--siaae-yellow);
 }
 
 .footer-bottom-container {

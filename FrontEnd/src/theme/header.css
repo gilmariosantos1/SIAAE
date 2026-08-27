@@ -1,14 +1,32 @@
 header {
     padding: 5px 30px;
-    border-bottom: 1px solid #E4E6EA;
+    background-color: var(--siaae-green);
+    border-bottom: 4px solid var(--siaae-yellow);
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    min-height: 64px;
+    box-sizing: border-box;
 }
 
+.header-back { flex: 0 0 auto; --color: #fff; margin-right: 8px; }
+.header-back ion-back-button { --color: #fff; }
+
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     cursor: pointer;
+}
+
+.logo ion-icon {
+    display: block;
+    padding: 8px;
+    border-radius: 10px;
+    color: var(--siaae-green-dark);
+    background-color: var(--siaae-orange);
+    font-size: 24px;
 }
 .logo img {
     max-width: 180px;
@@ -21,6 +39,7 @@ nav {
     display: flex;
     gap: 20px;
     height: auto;
+    align-items: center;
 }
 
 .sugestoes img {
@@ -52,13 +71,13 @@ nav {
     align-items: center;
     font-weight: 700;
     gap: 10px;
-    color: #1855A5;
+    color: #fff;
 }
 
 .login_cadastro span {
     width: 2px;
     height: 16px;
-    background-color: #1855A5;
+    background-color: #fff;
 }
 
 .login_cadastro p {
@@ -69,7 +88,7 @@ nav {
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: #1855A5;
+    color: #fff;
     gap: 5px;
     cursor: pointer;
 }
@@ -87,7 +106,7 @@ nav {
     position: absolute;
     margin-left: 175px;
     margin-bottom: 35px;
-    background-color: #DD9933;
+    background-color: var(--siaae-yellow);
     padding: 3px 4px;
     font-size: 9px;
     line-height: 12px;
@@ -100,7 +119,7 @@ nav {
     position: absolute;
     top: 125px;
     right: 0px;
-    background-color: #DD9933;
+    background-color: var(--siaae-green-dark);
     padding: 7px 5px;
     border-radius: 0 0 0 20px;
     opacity: 0;
@@ -125,13 +144,19 @@ nav {
 }
 
 .menu_drop_item:hover {
-    background-color: #c98d33;
+    background-color: var(--siaae-green);
 }
 
 @media only screen and (max-width:600px) {
     header {
-        padding: 5px 10px;
+        padding: 6px 10px;
+        gap: 8px;
     }
+    nav { gap: 8px; min-width: 0; }
+    .logo { flex-shrink: 0; gap: 6px; font-size: .95rem; }
+    .logo ion-icon { padding: 6px; font-size: 20px; }
+    .nav_itens { font-size: 12px; }
+    .nav_itens h3 { margin: 0; }
     .login_cadastro {
         flex-direction: column;
         gap: 3px;
@@ -157,9 +182,7 @@ nav {
     .logo img {
         max-width: 95px;
     }
-    .nav_itens {
-        font-size: 14px;
-    }
+    .nav_itens { font-size: 11px; }
     .sugestoes img {
         width: 30px;
     }
@@ -167,7 +190,7 @@ nav {
         font-size: 14px;
     }
     nav {
-        gap: 10px;
+        gap: 5px;
     }
     #menu_drop {
         top: 74px;

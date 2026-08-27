@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { IonButton, IonContent, IonHeader, IonIcon, IonPage, IonSpinner, IonToolbar } from '@ionic/react';
-import { calendarOutline, chatbubbleEllipsesOutline, chevronForward, restaurantOutline } from 'ionicons/icons';
+import { IonButton, IonContent, IonIcon, IonPage, IonSpinner } from '@ionic/react';
+import { calendarOutline, chatbubbleEllipsesOutline, chevronForward } from 'ionicons/icons';
 import { getTodayMenus, Menu } from '../services/menuService';
-import './Home.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import '../theme/home.css';
 
 const Home: React.FC = () => {
   const [menus, setMenus] = useState<Menu[]>([]);
@@ -14,16 +16,8 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader className="siaae-header">
-        <IonToolbar>
-          <div className="brand" slot="start">
-            <span className="brand-mark"><IonIcon icon={restaurantOutline} /></span>
-            <span>SIAAE</span>
-          </div>
-          <span className="header-school" slot="end">Alimentação escolar</span>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
+      <Header />
+      <IonContent>
         <main className="home-shell">
           <section className="welcome-block">
             <p className="eyebrow">CARDÁPIO DE HOJE</p>
@@ -56,6 +50,7 @@ const Home: React.FC = () => {
           </nav>
         </main>
       </IonContent>
+      <Footer />
     </IonPage>
   );
 };
