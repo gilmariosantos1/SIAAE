@@ -4,7 +4,7 @@ import { calendarOutline, chatbubbleEllipsesOutline, chevronForward } from 'ioni
 import { getTodayMenus, Menu } from '../services/menuService';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import '../theme/home.css';
+import '../theme/Home.css';
 
 const Home: React.FC = () => {
   const [menus, setMenus] = useState<Menu[]>([]);

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { IonIcon, IonSpinner } from '@ionic/react';
 import { accessibilityOutline } from 'ionicons/icons';
-import '../theme/accessibility.css';
+import '../theme/Accessibility.css';
 
 const AccessibilityTools = () => {
   const [isScrolling, setIsScrolling] = useState(false);

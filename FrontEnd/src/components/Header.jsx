@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import '../theme/header.css'
+import '../theme/Header.css'
 import { IonIcon } from '@ionic/react';
 import { restaurantOutline } from "ionicons/icons";
 
@@ -44,7 +44,7 @@ const Header = () => {
             <header>
                 <div onClick={handleHome} className="logo">
                     <span><IonIcon icon={restaurantOutline} /></span>
-                    <span>SEAAE</span>
+                    <span>SIAAE</span>
                 </div>
                 <nav>
                     <div onClick={handleHome} className="cardapio nav_itens">

@@ -5,8 +5,8 @@ import { submitEvaluation, RatingKey, Ratings } from '../services/studentService
 import { getTodayMenus, Menu } from '../services/menuService';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import '../theme/home.css';
-import '../theme/student-pages.css';
+import '../theme/Home.css';
+import '../theme/Student-pages.css';
 
 const criteria: { key: RatingKey; label: string }[] = [
     { key: 'taste', label: 'Sabor' },

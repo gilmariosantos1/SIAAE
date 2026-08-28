@@ -3,7 +3,7 @@ import { IonButton, IonContent, IonItem, IonLabel, IonPage, IonTextarea } from '
 import { submitFeedback } from '../services/studentService';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import '../theme/student-pages.css';
+import '../theme/Student-pages.css';
 export default function Feedback() {
   const [type, setType] = useState<'sugestao' | 'reclamacao' | 'elogio'>('sugestao'); const [message, setMessage] = useState(''); const [sent, setSent] = useState(false); const [error, setError] = useState('');
   async function send(event: FormEvent) { event.preventDefault(); setError(''); try { await submitFeedback(type, message); setSent(true); } catch (submitError) { setError(submitError instanceof Error ? submitError.message : 'Não foi possível enviar.'); } }
