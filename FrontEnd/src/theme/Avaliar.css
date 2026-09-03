@@ -1,0 +1,96 @@
+.evaluation-page .evaluation-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+}
+
+.evaluation-page .rating-group {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #dce7dd;
+    border-radius: 20px;
+    padding: clamp(24px, 4vw, 38px);
+    margin: 0 0 20px;
+    background: #fff;
+    box-shadow: 0 16px 40px rgba(27, 74, 40, .08);
+}
+
+.evaluation-page .rating-title {
+    margin: 0;
+    color: #183d24;
+    font-size: clamp(1.45rem, 3vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.evaluation-page .face-options {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 520px;
+    margin-top: 18px;
+}
+
+.evaluation-page .face {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    min-height: 88px;
+    border: 2px solid #dce7dd;
+    border-radius: 14px;
+    background: #f8f9fa;
+    padding: 10px 4px;
+    color: var(--siaae-green-dark);
+    cursor: pointer;
+    transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.evaluation-page .face:hover {
+    border-color: var(--siaae-green);
+    background: #edf5ee;
+}
+
+.evaluation-page .face-emoji {
+    font-size: 2.25rem;
+    line-height: 1;
+}
+
+.evaluation-page .face-description {
+    font-size: .72rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.evaluation-page .face.selected {
+    border-color: var(--siaae-yellow);
+    background: #fff8dc;
+    box-shadow: 0 4px 12px rgba(229, 184, 50, .22);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 520px) {
+    .evaluation-page .rating-group {
+        padding: 20px 16px;
+    }
+
+    .evaluation-page .face-options {
+        gap: 5px;
+        width: 100%;
+    }
+
+    .evaluation-page .face {
+        min-height: 78px;
+        padding: 8px 2px;
+    }
+
+    .evaluation-page .face-emoji {
+        font-size: 1.85rem;
+    }
+
+    .evaluation-page .face-description {
+        font-size: .65rem;
+    }
+}

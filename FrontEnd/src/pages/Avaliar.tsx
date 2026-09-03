@@ -7,12 +7,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../theme/Home.css';
 import '../theme/Student-pages.css';
+import '../theme/Avaliar.css';
 
 const criteria: { key: RatingKey; label: string }[] = [
-    { key: 'taste', label: 'Sabor' },
-    { key: 'appearance', label: 'Aparência' },
-    { key: 'temperature', label: 'Temperatura' },
-    { key: 'quantity', label: 'Quantidade' },
+    { key: 'taste', label: 'Você gostou do sabor da merenda?' },
+    { key: 'appearance', label: 'A comida estava bonita e convidativa?' },
+    { key: 'temperature', label: 'A comida estava quente ou fria na medida certa?' },
+    { key: 'quantity', label: 'A quantidade de comida era suficiente?' },
 ];
 const faces = [
     { emoji: '😡', description: 'Péssima' },
@@ -65,7 +66,7 @@ export default function Evaluate() {
         <IonPage>
             <Header />
             <IonContent>
-                <main className="student-shell">
+                <main className="student-shell evaluation-page">
                     <IonButton
                         className="back-button"
                         fill="clear"

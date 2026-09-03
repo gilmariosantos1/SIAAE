@@ -1,0 +1,108 @@
+.page-brand {
+    color: white;
+    padding-left: 5vw;
+    font-size: 1.1rem;
+}
+
+.thank-you {
+    text-align: center;
+    padding-top: 18vh;
+}
+
+.thank-emoji {
+    font-size: 4.5rem;
+}
+
+.thank-you p:not(.eyebrow) {
+    color: #536057;
+    font-size: 1.1rem;
+    margin: 0 auto 28px;
+    max-width: 420px;
+}
+
+.feedback-types {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.type-option {
+    border: 1px solid #bed2c1;
+    border-radius: 8px;
+    background: white;
+    color: var(--siaae-green-dark);
+    padding: 12px 18px;
+    font-weight: 700;
+}
+
+.type-option.active {
+    color: white;
+    background: var(--siaae-green);
+}
+
+.success-message {
+    color: var(--siaae-green-dark);
+    font-weight: 700;
+    margin-bottom: 28px;
+}
+
+.week-item {
+    display: grid;
+    gap: 7px;
+    border-left: 5px solid var(--siaae-yellow);
+    padding: 18px 20px;
+    margin: 12px 0;
+    background: white;
+    box-shadow: 0 8px 24px rgba(27, 74, 40, .08);
+}
+
+.week-item span,
+.week-item small {
+    color: #536057;
+}
+
+.week-item strong {
+    color: var(--siaae-green-dark);
+    font-size: 1.2rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.metric {
+    background: white;
+    border-top: 5px solid var(--siaae-green);
+    padding: 22px;
+    box-shadow: 0 8px 24px rgba(27, 74, 40, .08);
+}
+
+.metric span {
+    display: block;
+    color: #536057;
+}
+
+.metric strong {
+    display: block;
+    color: var(--siaae-green-dark);
+    font-size: 2.2rem;
+    margin-top: 8px;
+}
+
+@media (max-width: 520px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-shell {
+        padding: 28px 5vw 44px;
+    }
+
+    .student-shell h1 {
+        font-size: 2.35rem;
+    }
+
+}

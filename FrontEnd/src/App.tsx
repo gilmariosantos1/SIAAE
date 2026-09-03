@@ -3,9 +3,9 @@ import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import { AuthProvider } from './contexts/AuthContext';
-import Evaluate from './pages/Evaluate';
+import Evaluate from './pages/Avaliar';
 import ThankYou from './pages/ThankYou';
-import Feedback from './pages/Feedback';
+import DuvidasSugestoes from './pages/DuvidasSugestoes';
 import WeekMenu from './pages/WeekMenu';
 import AdminDashboard from './pages/AdminDashboard';
 import AccessibilityTools from './components/AccessibilityTools';
@@ -42,8 +42,11 @@ import './theme/Variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <AuthProvider>
+function App() {
+  
+  return (
+    <>
+  
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
@@ -52,7 +55,9 @@ const App: React.FC = () => (
           </Route>
           <Route exact path="/avaliar/:menuId"><Evaluate /></Route>
           <Route exact path="/obrigado"><ThankYou /></Route>
-          <Route exact path="/fale-com-nutricao"><Feedback /></Route>
+          <Route exact path="/DuvidasSugestoes">
+            <DuvidasSugestoes />
+          </Route>
           <Route exact path="/cardapio-semana"><WeekMenu /></Route>
           <Route exact path="/admin"><AdminDashboard /></Route>
           <Route exact path="/">
@@ -62,7 +67,9 @@ const App: React.FC = () => (
         <AccessibilityTools />
       </IonReactRouter>
     </IonApp>
-  </AuthProvider>
+    </>
+  
 );
+}
 
 export default App;
