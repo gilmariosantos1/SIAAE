@@ -1,4 +1,4 @@
-import { pool } from '../config/database.js';
+import { pool } from "../config/database.js";
 export async function createEvaluation(input) {
     const [result] = await pool.query(`INSERT INTO avaliacoes
       (cardapio_id, aluno_id, sabor, aparencia, temperatura, quantidade, sugestao)

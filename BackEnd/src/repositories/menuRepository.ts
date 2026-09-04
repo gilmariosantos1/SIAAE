@@ -1,5 +1,5 @@
-import { RowDataPacket } from 'mysql2';
-import { pool } from '../config/database.js';
+import { RowDataPacket } from "mysql2";
+import { pool } from "../config/database.js";
 
 export type Menu = {
   id: number;

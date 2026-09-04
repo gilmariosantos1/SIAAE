@@ -1,4 +1,4 @@
-import { pool } from '../config/database.js';
+import { pool } from "../config/database.js";
 export async function findMenusByDate(date) {
     const [rows] = await pool.query(`SELECT c.id, DATE_FORMAT(c.data, '%Y-%m-%d') AS date,
       e.nome AS school, c.turno AS shift, c.refeicao AS meal,

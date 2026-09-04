@@ -1,5 +1,5 @@
-import { RowDataPacket } from 'mysql2';
-import { pool } from '../config/database.js';
+import { RowDataPacket } from "mysql2";
+import { pool } from "../config/database.js";
 
 export type EvaluationInput = {
   menuId: number;
@@ -21,7 +21,9 @@ export type Evaluation = {
 
 type EvaluationRow = RowDataPacket & Evaluation;
 
-export async function createEvaluation(input: EvaluationInput): Promise<Evaluation> {
+export async function createEvaluation(
+  input: EvaluationInput,
+): Promise<Evaluation> {
   const [result] = await pool.query(
     `INSERT INTO avaliacoes
       (cardapio_id, aluno_id, sabor, aparencia, temperatura, quantidade, sugestao)
@@ -39,7 +41,9 @@ export async function createEvaluation(input: EvaluationInput): Promise<Evaluati
   return rows[0];
 }
 
-export async function findEvaluationsByStudent(studentId: number): Promise<Evaluation[]> {
+export async function findEvaluationsByStudent(
+  studentId: number,
+): Promise<Evaluation[]> {
   const [rows] = await pool.query<EvaluationRow[]>(
     `SELECT a.id, a.cardapio_id AS menuId, c.nome_prato AS dish,
       ROUND((a.sabor + a.aparencia + a.temperatura + a.quantidade) / 4, 2) AS average,

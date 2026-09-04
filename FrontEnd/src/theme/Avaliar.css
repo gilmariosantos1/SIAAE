@@ -71,6 +71,24 @@
     transform: translateY(-2px);
 }
 
+.evaluation-page .suggestion-item ion-textarea {
+    --color: #000;
+    --placeholder-color: #000;
+    --placeholder-opacity: 1;
+    color: #000 !important;
+}
+
+.evaluation-page .suggestion-item ion-textarea::part(native) {
+    color: #000 !important;
+    caret-color: #000 !important;
+    -webkit-text-fill-color: #000;
+}
+
+.evaluation-page .suggestion-item ion-textarea::part(native)::placeholder {
+    color: #000;
+    opacity: 1;
+}
+
 @media (max-width: 520px) {
     .evaluation-page .rating-group {
         padding: 20px 16px;
