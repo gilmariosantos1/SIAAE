@@ -8,6 +8,7 @@ import ThankYou from './pages/ThankYou';
 import DuvidasSugestoes from './pages/DuvidasSugestoes';
 import WeekMenu from './pages/WeekMenu';
 import AdminDashboard from './pages/AdminDashboard';
+import MenuRegistration from './pages/MenuRegistration';
 import AccessibilityTools from './components/AccessibilityTools';
 
 /* Core CSS required for Ionic components to work properly */
@@ -60,6 +61,7 @@ function App() {
           </Route>
           <Route exact path="/cardapio-semana"><WeekMenu /></Route>
           <Route exact path="/admin"><AdminDashboard /></Route>
+          <Route exact path="/admin/cardapios"><MenuRegistration /></Route>
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>

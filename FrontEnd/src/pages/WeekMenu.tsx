@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IonContent, IonPage, IonSpinner } from "@ionic/react";
+import { IonButton, IonContent, IonPage, IonSpinner } from "@ionic/react";
 import { getWeekMenus, Menu } from "../services/menuService";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -30,6 +30,9 @@ export default function WeekMenu() {
           ) : (
             <IonSpinner />
           )}
+          <IonButton routerLink="/admin/cardapios">
+            Cadastrar cardápio
+          </IonButton>
         </main>
       </IonContent>
       <Footer />

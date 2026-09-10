@@ -1,3 +1,36 @@
+.evaluation-details { margin-top: 18px; color: #536057; line-height: 1.7; font-size: .92rem; }
+.evaluation-menu-switcher,
+.evaluation-ingredients {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 22px 0;
+    padding: 18px;
+    border: 1px solid #dce7dd;
+    border-radius: 14px;
+    background: #f7faf7;
+}
+.evaluation-menu-switcher ion-label,
+.evaluation-ingredients ion-label {
+    color: #183d24;
+    font-weight: 800;
+}
+.evaluation-menu-switcher ion-select,
+.evaluation-ingredients ion-select {
+    min-height: 44px;
+    color: #183d24;
+    font-weight: 700;
+    --background: #fff;
+    --border-radius: 9px;
+}
+.evaluation-success {
+    margin: 18px 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: #236036;
+    background: #eaf5ed;
+    font-weight: 700;
+}
 .evaluation-page .evaluation-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);

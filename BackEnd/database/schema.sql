@@ -16,6 +16,7 @@ CREATE TABLE turmas (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   escola_id INT UNSIGNED NOT NULL,
   nome VARCHAR(80) NOT NULL,
+  etapa_ensino ENUM('Educação Infantil - Creche','Educação Infantil - Pré-Escolar', '1º Ano', '2º Ano','3º Ano','4º Ano', '5º Ano', '6º Ano', '7º Ano', '8º Ano', '9º Ano', 'EJAEF - Anos Iniciais', 'EJAEF - Anos Finais') NOT NULL,
   faixa_etaria VARCHAR(40) NOT NULL,
   turno ENUM('manha', 'tarde', 'noite', 'integral') NOT NULL,
   ativo BOOLEAN NOT NULL DEFAULT TRUE,
@@ -50,20 +51,52 @@ CREATE TABLE cardapios (
   nutricionista_id INT UNSIGNED NULL,
   data DATE NOT NULL,
   turno ENUM('manha', 'tarde', 'noite', 'integral') NOT NULL,
+  etapa_ensino ENUM('Educação Infantil - Creche','Educação Infantil - Pré-Escolar', 'Ensino Fundamental - Anos Iniciais', 'Ensino Fundamental - Anos Finais', 'EJA - Anos Iniciais', 'EJA - Anos Finais') NOT NULL,
   refeicao VARCHAR(80) NOT NULL,
   nome_prato VARCHAR(160) NOT NULL,
   ingredientes TEXT NULL,
   ativo BOOLEAN NOT NULL DEFAULT TRUE,
   FOREIGN KEY (escola_id) REFERENCES escolas(id),
   FOREIGN KEY (nutricionista_id) REFERENCES usuarios(id),
-  UNIQUE KEY uq_cardapio_refeicao (escola_id, data, turno, refeicao),
+  UNIQUE KEY uq_cardapio_refeicao (escola_id, data, turno, refeicao, etapa_ensino),
   INDEX idx_cardapios_data (data, ativo)
+);
+
+CREATE TABLE cardapio_ingredientes (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cardapio_id INT UNSIGNED NOT NULL,
+  nome VARCHAR(120) NOT NULL,
+  FOREIGN KEY (cardapio_id) REFERENCES cardapios(id) ON DELETE CASCADE,
+  UNIQUE KEY uq_cardapio_ingrediente (cardapio_id, nome)
+);
+
+CREATE TABLE refeicoes_servidas (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cardapio_id INT UNSIGNED NOT NULL,
+  escola_id INT UNSIGNED NOT NULL,
+  turma_id INT UNSIGNED NOT NULL,
+  etapa_ensino VARCHAR(80) NOT NULL,
+  criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (cardapio_id) REFERENCES cardapios(id),
+  FOREIGN KEY (escola_id) REFERENCES escolas(id),
+  FOREIGN KEY (turma_id) REFERENCES turmas(id),
+  INDEX idx_refeicoes_servidas_cardapio (cardapio_id, criado_em)
+);
+
+CREATE TABLE refeicoes_servidas_ingredientes (
+  refeicao_servida_id BIGINT UNSIGNED NOT NULL,
+  nome VARCHAR(120) NOT NULL,
+  PRIMARY KEY (refeicao_servida_id, nome),
+  FOREIGN KEY (refeicao_servida_id) REFERENCES refeicoes_servidas(id) ON DELETE CASCADE
 );
 
 CREATE TABLE avaliacoes (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   cardapio_id INT UNSIGNED NOT NULL,
-  aluno_id INT UNSIGNED NOT NULL,
+  escola_id INT UNSIGNED NOT NULL,
+  turma_id INT UNSIGNED NOT NULL,
+  etapa_ensino VARCHAR(80) NOT NULL,
+  refeicao_servida_id BIGINT UNSIGNED NOT NULL,
   sabor TINYINT UNSIGNED NOT NULL CHECK (sabor BETWEEN 1 AND 5),
   aparencia TINYINT UNSIGNED NOT NULL CHECK (aparencia BETWEEN 1 AND 5),
   temperatura TINYINT UNSIGNED NOT NULL CHECK (temperatura BETWEEN 1 AND 5),
@@ -71,8 +104,10 @@ CREATE TABLE avaliacoes (
   sugestao VARCHAR(500) NULL,
   criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (cardapio_id) REFERENCES cardapios(id),
-  FOREIGN KEY (aluno_id) REFERENCES alunos(id),
-  UNIQUE KEY uq_aluno_cardapio (aluno_id, cardapio_id),
+  FOREIGN KEY (escola_id) REFERENCES escolas(id),
+  FOREIGN KEY (turma_id) REFERENCES turmas(id),
+  FOREIGN KEY (refeicao_servida_id) REFERENCES refeicoes_servidas(id),
+  UNIQUE KEY uq_turma_refeicao_servida (turma_id, refeicao_servida_id),
   INDEX idx_avaliacoes_cardapio (cardapio_id, criado_em)
 );
 
@@ -105,3 +140,5 @@ CREATE TABLE logs_acesso (
   criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
+-- avaliar inserir etapa de ensino junto ao cardápio, para que seja possível filtrar cardápios por etapa de ensino. 20260030727436
+--O protocolo deste atendimento é: 2026-0030727496

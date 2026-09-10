@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { IonButton, IonContent, IonIcon, IonLabel, IonPage, IonSpinner, IonTextarea, useIonRouter } from '@ionic/react';
+import { IonButton, IonContent, IonIcon, IonLabel, IonPage, IonSelect, IonSelectOption, IonSpinner, IonTextarea, useIonRouter } from '@ionic/react';
 import { calendarOutline } from 'ionicons/icons';
 import { submitEvaluation, RatingKey, Ratings } from '../services/studentService';
 import { getTodayMenus, Menu } from '../services/menuService';
@@ -26,17 +26,47 @@ const faces = [
 export default function Evaluate() {
     const router = useIonRouter();
     const menuId = Number(router.routeInfo.pathname.split('/').pop());
+    const searchParams = new URLSearchParams(router.routeInfo.search);
+    const classId = Number(searchParams.get('classId'));
+    const educationStage = searchParams.get('educationStage') ?? '';
+    const schoolId = Number(searchParams.get('schoolId'));
+    const initialIngredients = searchParams.get('ingredients')?.split('|').filter(Boolean) ?? [];
+    const [menus, setMenus] = useState<Menu[]>([]);
     const [menu, setMenu] = useState<Menu>();
+    const [selectedIngredients, setSelectedIngredients] = useState<string[]>(initialIngredients);
     const [ratings, setRatings] = useState<Ratings>({ taste: 0, appearance: 0, temperature: 0, quantity: 0 });
     const [suggestion, setSuggestion] = useState('');
     const [error, setError] = useState('');
     const [sending, setSending] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         getTodayMenus().then((menus) => {
-            setMenu(menus.find((currentMenu) => currentMenu.id === menuId) ?? menus[0]);
+            const availableMenus = schoolId ? menus.filter((currentMenu) => currentMenu.schoolId === schoolId) : menus;
+            setMenus(availableMenus);
+            setMenu(availableMenus.find((currentMenu) => currentMenu.id === menuId) ?? availableMenus[0]);
         });
-    }, [menuId]);
+    }, [menuId, schoolId]);
+
+    useEffect(() => {
+        setSubmitted(false);
+        const selectedMenu = menus.find((currentMenu) => currentMenu.id === menuId);
+        setMenu(selectedMenu ?? menus[0]);
+        setSelectedIngredients(searchParams.get('ingredients')?.split('|').filter(Boolean) ?? []);
+    }, [menuId, menus]);
+
+    const nextMenu = menu ? menus.find((candidate) => candidate.id !== menu.id) : undefined;
+
+    function goToNextMenu() {
+        if (!nextMenu) {
+            router.push('/home');
+            return;
+        }
+        setRatings({ taste: 0, appearance: 0, temperature: 0, quantity: 0 });
+        setSuggestion('');
+        setSelectedIngredients([]);
+        router.push(`/avaliar/${nextMenu.id}?schoolId=${nextMenu.schoolId}&classId=${classId}&educationStage=${encodeURIComponent(educationStage)}`);
+    }
 
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
@@ -49,8 +79,18 @@ export default function Evaluate() {
 
         setSending(true);
         try {
-            await submitEvaluation(menuId, ratings, suggestion);
-            router.push('/obrigado');
+            if (!classId || !educationStage) {
+                setError('Informe a turma e a etapa de ensino antes de avaliar.');
+                return;
+            }
+            if (!selectedIngredients.length) {
+                setError('Selecione pelo menos um ingrediente usado na refeição.');
+                return;
+            }
+            await submitEvaluation(menuId, ratings, suggestion, classId, educationStage, selectedIngredients);
+            setSubmitted(true);
+            setRatings({ taste: 0, appearance: 0, temperature: 0, quantity: 0 });
+            setSuggestion('');
         } catch (submitError) {
             setError(
                 submitError instanceof Error
@@ -87,9 +127,14 @@ export default function Evaluate() {
                                 </div>
                             </div>
                             <p className="school-name">{menu.school}</p>
-                            {menu.ingredients && (
-                                <p className="ingredients">{menu.ingredients}</p>
+                            {menu.ingredients.length > 0 && (
+                                <p className="ingredients">Cardápio: {menu.ingredients.join(', ')}</p>
                             )}
+                            <p className="evaluation-details">
+                                <strong>Ingredientes usados:</strong> {selectedIngredients.join(', ') || 'Não informados'}<br />
+                                <strong>Etapa:</strong> {educationStage || menu.educationStage}<br />
+                                <strong>Turma:</strong> {classId || 'Não informada'}
+                            </p>
                         </article>
                     ) : (
                         <div className="loading">
@@ -102,6 +147,18 @@ export default function Evaluate() {
                     <h1>Como estava a refeição?</h1>
 
                     <form onSubmit={handleSubmit}>
+                        {menu && menus.length > 1 && <div className="evaluation-menu-switcher">
+                            <IonLabel position="stacked">Refeição para avaliar</IonLabel>
+                            <IonSelect value={menu.id} onIonChange={(event) => router.push(`/avaliar/${event.detail.value}?schoolId=${schoolId}&classId=${classId}&educationStage=${encodeURIComponent(educationStage)}`)} interface="popover">
+                                {menus.map((availableMenu) => <IonSelectOption key={availableMenu.id} value={availableMenu.id}>{availableMenu.meal} · {availableMenu.dish}</IonSelectOption>)}
+                            </IonSelect>
+                        </div>}
+                        {menu && <div className="evaluation-ingredients">
+                            <IonLabel position="stacked">Ingredientes usados nesta refeição</IonLabel>
+                            <IonSelect multiple value={selectedIngredients} placeholder="Selecione os ingredientes" onIonChange={(event) => setSelectedIngredients(event.detail.value)} interface="popover">
+                                {menu.ingredients.map((ingredient) => <IonSelectOption key={ingredient} value={ingredient}>{ingredient}</IonSelectOption>)}
+                            </IonSelect>
+                        </div>}
                         <div className="evaluation-grid">
                             {criteria.map(({ key, label }) => (
                                 <div
@@ -164,13 +221,14 @@ export default function Evaluate() {
                             </p>
                         )}
 
-                        <IonButton
+                        {submitted && <div className="evaluation-success" role="status">Avaliação enviada. O mesmo contexto será mantido na próxima refeição.</div>}
+                        {!submitted ? <IonButton
                             type="submit"
                             expand="block"
                             disabled={sending}
                         >
                             {sending ? 'Enviando...' : 'Enviar avaliação'}
-                        </IonButton>
+                        </IonButton> : <IonButton type="button" expand="block" onClick={goToNextMenu}>{nextMenu ? 'Avaliar próxima refeição' : 'Voltar ao cardápio'}</IonButton>}
                     </form>
                 </main>
             </IonContent>

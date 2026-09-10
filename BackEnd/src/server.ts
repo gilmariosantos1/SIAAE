@@ -2,6 +2,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import rateLimit from "express-rate-limit";
+import { pool } from "./config/database.js";
 import { menuRoutes } from "./routes/menuRoutes.js";
 import { studentRoutes } from "./routes/studentRoutes.js";
 import { adminRoutes } from "./routes/adminRoutes.js";
@@ -39,6 +40,24 @@ app.use(
   },
 );
 
-app.listen(port, () =>
-  console.log(`SIAAE API disponível em http://localhost:${port}`),
-);
+async function startServer() {
+  let connection;
+
+  try {
+    connection = await pool.getConnection();
+    await connection.query("SELECT 1");
+    console.log("Conexão com o banco de dados estabelecida.");
+
+    app.listen(port, () =>
+      console.log(`SIAAE API disponível em http://localhost:${port}`),
+    );
+  } catch (error) {
+    console.error("Não foi possível conectar ao banco de dados:", error);
+    await pool.end();
+    process.exit(1);
+  } finally {
+    connection?.release();
+  }
+}
+
+void startServer();

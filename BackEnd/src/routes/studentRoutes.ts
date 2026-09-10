@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { body, param, validationResult } from "express-validator";
+import { body, param, query, validationResult } from "express-validator";
 import {
   createEvaluation,
-  findEvaluationsByStudent,
+  findEvaluationsByClass,
 } from "../repositories/evaluationRepository.js";
 import { createFeedback } from "../repositories/feedbackRepository.js";
+import { findClasses } from "../repositories/studentRepository.js";
 
 export const studentRoutes = Router();
 const validate = (
@@ -18,10 +19,34 @@ const validate = (
   return next();
 };
 
+studentRoutes.get(
+  "/classes",
+  query("schoolId").optional().isInt({ min: 1 }),
+  query("educationStage").optional().isLength({ min: 1, max: 80 }),
+  validate,
+  async (request, response, next) => {
+    try {
+      const schoolId = request.query?.schoolId;
+      const educationStage = request.query?.educationStage;
+      return response.json({
+        data: await findClasses(
+          schoolId ? Number(schoolId) : undefined,
+          educationStage ? String(educationStage) : undefined,
+        ),
+      });
+    } catch (error) {
+      return next(error);
+    }
+  },
+);
+
 studentRoutes.post(
   "/evaluations",
   body("menuId").isInt({ min: 1 }),
-  body("studentId").optional().isInt({ min: 1 }),
+  body("classId").isInt({ min: 1 }),
+  body("educationStage").isLength({ min: 1, max: 80 }).trim(),
+  body("ingredients").isArray({ min: 1 }),
+  body("ingredients.*").isString().isLength({ min: 1, max: 120 }).trim(),
   body(["taste", "appearance", "temperature", "quantity"]).isInt({
     min: 1,
     max: 5,
@@ -32,7 +57,6 @@ studentRoutes.post(
     try {
       const evaluation = await createEvaluation({
         ...request.body,
-        studentId: request.body.studentId ?? 1,
       });
       return response
         .status(201)
@@ -51,13 +75,13 @@ studentRoutes.post(
 );
 
 studentRoutes.get(
-  "/evaluations/:studentId",
-  param("studentId").isInt({ min: 1 }),
+  "/evaluations/class/:classId",
+  param("classId").isInt({ min: 1 }),
   validate,
   async (request, response, next) => {
     try {
       return response.json({
-        data: await findEvaluationsByStudent(Number(request.params?.studentId)),
+        data: await findEvaluationsByClass(Number(request.params?.classId)),
       });
     } catch (error) {
       return next(error);

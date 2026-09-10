@@ -1,0 +1,67 @@
+.menu-registration-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 6vw 64px;
+}
+
+.menu-registration-shell h1 {
+  margin: 0 0 8px;
+  color: var(--siaae-green-dark);
+  font-size: clamp(2.3rem, 6vw, 4rem);
+}
+
+.menu-registration-intro {
+  margin: 0 0 28px;
+  color: #52645a;
+  font-size: 1.05rem;
+}
+
+.menu-form {
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+  border: 1px solid #dce7dd;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(27, 74, 40, .08);
+}
+
+.menu-form ion-item {
+  --background: transparent;
+  --color: #183d24;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+.menu-form ion-label {
+  color: #183d24 !important;
+  font-weight: 700;
+}
+
+.menu-form ion-input,
+.menu-form ion-select,
+.menu-form ion-textarea {
+  --color: #212529;
+  --placeholder-color: #68756d;
+  --placeholder-opacity: 1;
+}
+
+.menu-form ion-select::part(text),
+.menu-form ion-select::part(placeholder) {
+  color: #68756d;
+  opacity: 1;
+}
+
+.menu-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.form-success { color: var(--siaae-green); font-weight: 700; margin: 0; }
+
+@media (max-width: 620px) {
+  .menu-registration-shell { padding: 28px 5vw 44px; }
+  .menu-form { padding: 20px; }
+  .menu-form-grid { grid-template-columns: 1fr; }
+}

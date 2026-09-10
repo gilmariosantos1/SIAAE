@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { body, param, validationResult } from "express-validator";
-import { createEvaluation, findEvaluationsByStudent, } from "../repositories/evaluationRepository.js";
+import { body, param, query, validationResult } from "express-validator";
+import { createEvaluation, findEvaluationsByClass, } from "../repositories/evaluationRepository.js";
 import { createFeedback } from "../repositories/feedbackRepository.js";
+import { findClasses } from "../repositories/studentRepository.js";
 export const studentRoutes = Router();
 const validate = (request, response, next) => {
     const errors = validationResult(request);
@@ -9,14 +10,25 @@ const validate = (request, response, next) => {
         return response.status(400).json({ errors: errors.array() });
     return next();
 };
-studentRoutes.post("/evaluations", body("menuId").isInt({ min: 1 }), body("studentId").optional().isInt({ min: 1 }), body(["taste", "appearance", "temperature", "quantity"]).isInt({
+studentRoutes.get("/classes", query("schoolId").optional().isInt({ min: 1 }), query("educationStage").optional().isLength({ min: 1, max: 80 }), validate, async (request, response, next) => {
+    try {
+        const schoolId = request.query?.schoolId;
+        const educationStage = request.query?.educationStage;
+        return response.json({
+            data: await findClasses(schoolId ? Number(schoolId) : undefined, educationStage ? String(educationStage) : undefined),
+        });
+    }
+    catch (error) {
+        return next(error);
+    }
+});
+studentRoutes.post("/evaluations", body("menuId").isInt({ min: 1 }), body("classId").isInt({ min: 1 }), body("educationStage").isLength({ min: 1, max: 80 }).trim(), body("ingredients").isArray({ min: 1 }), body("ingredients.*").isString().isLength({ min: 1, max: 120 }).trim(), body(["taste", "appearance", "temperature", "quantity"]).isInt({
     min: 1,
     max: 5,
 }), body("suggestion").optional().isLength({ max: 500 }), validate, async (request, response, next) => {
     try {
         const evaluation = await createEvaluation({
             ...request.body,
-            studentId: request.body.studentId ?? 1,
         });
         return response
             .status(201)
@@ -33,10 +45,10 @@ studentRoutes.post("/evaluations", body("menuId").isInt({ min: 1 }), body("stude
         return next(error);
     }
 });
-studentRoutes.get("/evaluations/:studentId", param("studentId").isInt({ min: 1 }), validate, async (request, response, next) => {
+studentRoutes.get("/evaluations/class/:classId", param("classId").isInt({ min: 1 }), validate, async (request, response, next) => {
     try {
         return response.json({
-            data: await findEvaluationsByStudent(Number(request.params?.studentId)),
+            data: await findEvaluationsByClass(Number(request.params?.classId)),
         });
     }
     catch (error) {
