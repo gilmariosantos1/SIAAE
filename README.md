@@ -11,7 +11,8 @@ Sistema Integrado de Avaliação da Alimentação Escolar.
 
 1. Copie `BackEnd/.env.example` para `BackEnd/.env` e preencha as credenciais MySQL.
 2. Execute `BackEnd/database/schema.sql`.
-3. Execute `BackEnd/database/seed.sql` para dados de demonstração.
+3. Em uma instalação existente, execute `BackEnd/database/003_cardapios_semanais.sql` para converter a data dos cardápios em dia da semana.
+4. Execute `BackEnd/database/seed.sql` para dados de demonstração.
 
 ## Executar a API
 
@@ -21,7 +22,7 @@ npm install
 npm run dev
 ```
 
-A API fica em `http://localhost:3333`. O endpoint de saúde é `GET /health` e o cardápio do dia é `GET /api/menus?date=YYYY-MM-DD`.
+A API fica em `http://localhost:3333`. O endpoint de saúde é `GET /health` e o cardápio do dia é `GET /api/menus?date=YYYY-MM-DD`. A data consultada serve para identificar o dia da semana; cada cardápio ativo se repete semanalmente nesse dia.
 
 ## Executar o frontend
 

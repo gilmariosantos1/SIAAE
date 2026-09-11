@@ -9,6 +9,7 @@ import {
   IonSelect,
   IonSelectOption,
   IonTextarea,
+  IonToggle,
 } from '@ionic/react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -18,12 +19,13 @@ import '../theme/MenuRegistration.css';
 const initialForm = {
   schoolIds: [] as string[],
   nutritionistId: '',
-  date: new Date().toISOString().slice(0, 10),
+  dayOfWeek: '',
   educationStage: '',
   shift: '',
   meal: '',
   dish: '',
   ingredients: '',
+  active: true,
 };
 
 export function MenuRegistrationForm() {
@@ -50,12 +52,13 @@ export function MenuRegistrationForm() {
       await createMenu({
         schoolIds: form.schoolIds.map(Number),
         nutritionistId: form.nutritionistId ? Number(form.nutritionistId) : undefined,
-        date: form.date,
+        dayOfWeek: Number(form.dayOfWeek),
         educationStage: form.educationStage,
         shift: form.shift as 'manha' | 'tarde' | 'noite' | 'integral',
         meal: form.meal,
         dish: form.dish,
         ingredients: form.ingredients.split(',').map((ingredient) => ingredient.trim()).filter(Boolean),
+        active: form.active,
       });
       setForm(initialForm);
       setMessage('Cardápio cadastrado com sucesso.');
@@ -80,8 +83,14 @@ export function MenuRegistrationForm() {
             </IonItem>
             <div className="menu-form-grid">
               <IonItem>
-                <IonLabel position="stacked">Data</IonLabel>
-                <IonInput type="date" value={form.date} onIonInput={(event) => update('date', event.detail.value)} required />
+                <IonLabel position="stacked">Dia da semana</IonLabel>
+                <IonSelect value={form.dayOfWeek} placeholder="Selecione" onIonChange={(event) => update('dayOfWeek', event.detail.value)} required>
+                  <IonSelectOption value="1">Segunda-feira</IonSelectOption>
+                  <IonSelectOption value="2">Terça-feira</IonSelectOption>
+                  <IonSelectOption value="3">Quarta-feira</IonSelectOption>
+                  <IonSelectOption value="4">Quinta-feira</IonSelectOption>
+                  <IonSelectOption value="5">Sexta-feira</IonSelectOption>
+                </IonSelect>
               </IonItem>
               <IonItem>
                 <IonLabel position="stacked">Etapa de ensino</IonLabel>
@@ -119,6 +128,10 @@ export function MenuRegistrationForm() {
             <IonItem>
               <IonLabel position="stacked">Ingredientes</IonLabel>
               <IonTextarea value={form.ingredients} maxlength={65535} autoGrow placeholder="Informe os ingredientes principais" onIonInput={(event) => update('ingredients', event.detail.value)} />
+            </IonItem>
+            <IonItem>
+              <IonLabel>Cardápio ativo</IonLabel>
+              <IonToggle checked={form.active} onIonChange={(event) => setForm((current) => ({ ...current, active: event.detail.checked }))} />
             </IonItem>
             {message && <p className="form-success">{message}</p>}
             {error && <p className="form-error">{error}</p>}

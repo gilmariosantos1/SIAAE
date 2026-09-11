@@ -27,7 +27,7 @@ menuRoutes.post(
   body("schoolIds").isArray({ min: 1 }).withMessage("schoolIds é obrigatório"),
   body("schoolIds.*").isInt({ min: 1 }),
   body("nutritionistId").optional({ nullable: true }).isInt({ min: 1 }),
-  body("date").isISO8601().withMessage("date deve estar no formato YYYY-MM-DD"),
+  body("dayOfWeek").isInt({ min: 1, max: 7 }).withMessage("dayOfWeek deve estar entre 1 e 7"),
   body("educationStage").isIn([
     "Educação Infantil - Creche",
     "Educação Infantil - Pré-Escolar",
@@ -41,6 +41,7 @@ menuRoutes.post(
   body("dish").isLength({ min: 1, max: 160 }).trim(),
   body("ingredients").optional({ nullable: true }).isArray(),
   body("ingredients.*").optional().isString().isLength({ min: 1, max: 120 }).trim(),
+  body("active").isBoolean().withMessage("active deve ser booleano"),
   async (request, response, next) => {
     const errors = validationResult(request);
     if (!errors.isEmpty())
@@ -50,7 +51,7 @@ menuRoutes.post(
     } catch (error) {
       if ((error as { code?: string }).code === "ER_DUP_ENTRY") {
         return response.status(409).json({
-          message: "Já existe um cardápio para essa escola, data, turno e refeição.",
+          message: "Já existe um cardápio para essa escola, dia da semana, turno e refeição.",
         });
       }
       return next(error);

@@ -49,7 +49,7 @@ CREATE TABLE cardapios (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   escola_id INT UNSIGNED NOT NULL,
   nutricionista_id INT UNSIGNED NULL,
-  data DATE NOT NULL,
+  dia_semana TINYINT UNSIGNED NOT NULL COMMENT '1 = segunda-feira, 7 = domingo',
   turno ENUM('manha', 'tarde', 'noite', 'integral') NOT NULL,
   etapa_ensino ENUM('Educação Infantil - Creche','Educação Infantil - Pré-Escolar', 'Ensino Fundamental - Anos Iniciais', 'Ensino Fundamental - Anos Finais', 'EJA - Anos Iniciais', 'EJA - Anos Finais') NOT NULL,
   refeicao VARCHAR(80) NOT NULL,
@@ -58,8 +58,8 @@ CREATE TABLE cardapios (
   ativo BOOLEAN NOT NULL DEFAULT TRUE,
   FOREIGN KEY (escola_id) REFERENCES escolas(id),
   FOREIGN KEY (nutricionista_id) REFERENCES usuarios(id),
-  UNIQUE KEY uq_cardapio_refeicao (escola_id, data, turno, refeicao, etapa_ensino),
-  INDEX idx_cardapios_data (data, ativo)
+  UNIQUE KEY uq_cardapio_refeicao (escola_id, dia_semana, turno, refeicao, etapa_ensino),
+  INDEX idx_cardapios_dia_semana (dia_semana, ativo)
 );
 
 CREATE TABLE cardapio_ingredientes (

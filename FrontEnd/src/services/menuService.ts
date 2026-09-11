@@ -1,6 +1,7 @@
 export type Menu = {
   id: number;
   schoolId: number;
+  dayOfWeek: number;
   date: string;
   school: string;
   educationStage: string;
@@ -19,12 +20,13 @@ export type School = { id: number; name: string };
 export type CreateMenuInput = {
   schoolIds: number[];
   nutritionistId?: number;
-  date: string;
+  dayOfWeek: number;
   educationStage: string;
   shift: 'manha' | 'tarde' | 'noite' | 'integral';
   meal: string;
   dish: string;
   ingredients?: string[];
+  active: boolean;
 };
 
 export async function getSchools(): Promise<School[]> {
@@ -59,6 +61,7 @@ export async function getMenusByDate(date: string): Promise<Menu[]> {
     return [{
       id: 1,
       schoolId: 1,
+      dayOfWeek: new Date(`${date}T00:00:00`).getDay() || 7,
       date,
       school: 'EMEF Caminhos do Saber',
       educationStage: 'Ensino Fundamental - Anos Iniciais',

@@ -21,10 +21,15 @@ INSERT INTO escolas (nome, codigo_inep, endereco, diretor) VALUES
 ('ESCOLA MUNICIPAL PRESIDENTE DUTRA', '28002024', 'POVOADO LAGOA BONITA, S/N', 'JOSE RONALDO DE JESUS NASCIMENTO');
 
 INSERT INTO turmas (escola_id, nome, etapa_ensino, faixa_etaria, turno) VALUES
-(1, 'Creche A', 'Educação Infantil - Creche', '4 a 5 anos', 'manha');
+(1, 'Maternal I', 'Educação Infantil - Creche', '0 a 3 anos', 'manhã'),
+(2, 'Maternal I ', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
+(3, 'Maternal II ', 'Educação Infantil - Creche', '0 a 3 anos', 'manhã'),
+(4, 'Maternal II ', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
+(3, 'Pré-Escolar I ', 'Educação Infantil - Creche', '4 a 5 anos', 'manhã');
+
 INSERT INTO alunos (turma_id, identificador_anonimo) VALUES
 (1, SHA2('siaae-demo-aluno', 256));
-INSERT INTO cardapios (escola_id, data, etapa_ensino, turno, refeicao, nome_prato, ingredientes) VALUES
-(1, CURRENT_DATE, 'Educação Infantil - Creche', 'manha', 'Almoço', 'Arroz, feijão e frango assado', 'Arroz, feijão, frango, salada e banana');
+INSERT INTO cardapios (escola_id, dia_semana, etapa_ensino, turno, refeicao, nome_prato, ingredientes) VALUES
+(1, WEEKDAY(CURRENT_DATE) + 1, 'Educação Infantil - Creche', 'manhã', 'Almoço', 'Arroz, feijão e frango assado', 'Arroz, feijão, frango, salada e banana');
 INSERT INTO cardapio_ingredientes (cardapio_id, nome) VALUES
 (1, 'Arroz'), (1, 'Feijão'), (1, 'Frango'), (1, 'Salada'), (1, 'Banana');
