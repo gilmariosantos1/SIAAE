@@ -52,6 +52,9 @@ function App() {
       <IonReactRouter>
         <IonRouterOutlet>
           <Route exact path="/home">
+            <AdminDashboard />
+          </Route>
+          <Route exact path="/avaliar">
             <Home />
           </Route>
           <Route exact path="/avaliar/:menuId"><Evaluate /></Route>

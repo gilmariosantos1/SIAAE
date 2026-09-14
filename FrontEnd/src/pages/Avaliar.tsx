@@ -55,17 +55,11 @@ export default function Evaluate() {
         setSelectedIngredients(searchParams.get('ingredients')?.split('|').filter(Boolean) ?? []);
     }, [menuId, menus]);
 
-    const nextMenu = menu ? menus.find((candidate) => candidate.id !== menu.id) : undefined;
-
-    function goToNextMenu() {
-        if (!nextMenu) {
-            router.push('/home');
-            return;
-        }
+    function startNewEvaluation() {
         setRatings({ taste: 0, appearance: 0, temperature: 0, quantity: 0 });
         setSuggestion('');
-        setSelectedIngredients([]);
-        router.push(`/avaliar/${nextMenu.id}?schoolId=${nextMenu.schoolId}&classId=${classId}&educationStage=${encodeURIComponent(educationStage)}`);
+        setError('');
+        setSubmitted(false);
     }
 
     async function handleSubmit(event: FormEvent) {
@@ -228,7 +222,14 @@ export default function Evaluate() {
                             disabled={sending}
                         >
                             {sending ? 'Enviando...' : 'Enviar avaliação'}
-                        </IonButton> : <IonButton type="button" expand="block" onClick={goToNextMenu}>{nextMenu ? 'Avaliar próxima refeição' : 'Voltar ao cardápio'}</IonButton>}
+                        </IonButton> : <div className="evaluation-success-actions">
+                            <IonButton type="button" fill="outline" expand="block" routerLink="/home">
+                                Voltar ao cardápio
+                            </IonButton>
+                            <IonButton type="button" expand="block" onClick={startNewEvaluation}>
+                                Fazer nova avaliação
+                            </IonButton>
+                        </div>}
                     </form>
                 </main>
             </IonContent>

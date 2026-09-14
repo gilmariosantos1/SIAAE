@@ -66,7 +66,8 @@ const Home: React.FC = () => {
     ? `/avaliar/${selectedMenu.id}?schoolId=${selectedMenu.schoolId}&ingredients=${encodeURIComponent(selectedIngredients.join('|'))}&classId=${selectedClassId}&educationStage=${encodeURIComponent(selectedStage)}`
     : '/avaliar/0';
 
-  function selectSchool(schoolId: string) {
+  function selectSchool(value: string | number | null | undefined) {
+    const schoolId = value == null ? '' : String(value);
     setSelectedSchoolId(schoolId);
     setSelectedMenuId(menus.find((menu) => String(menu.schoolId) === schoolId)?.id);
   }
