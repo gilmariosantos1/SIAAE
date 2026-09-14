@@ -224,7 +224,7 @@ export default function Evaluate() {
                             {sending ? 'Enviando...' : 'Enviar avaliação'}
                         </IonButton> : <div className="evaluation-success-actions">
                             <IonButton type="button" fill="outline" expand="block" routerLink="/home">
-                                Voltar ao cardápio
+                                Voltar - Página Inicial
                             </IonButton>
                             <IonButton type="button" expand="block" onClick={startNewEvaluation}>
                                 Fazer nova avaliação

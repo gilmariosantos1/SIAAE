@@ -84,6 +84,9 @@ const Home: React.FC = () => {
         <main className="home-shell">
           <section className="welcome-block">
             <div className="welcome-kicker"><IonIcon icon={restaurantOutline} /> <span>Cardápio de hoje</span></div>
+             <IonButton type="button" fill="outline" expand="block" routerLink="/home">
+                                Voltar - Página Inicial
+                            </IonButton>
             <h1>Conte como foi a refeição.</h1>
             <p className="intro">Escolha a escola, identifique a turma e registre o que realmente foi servido.</p>
           </section>
