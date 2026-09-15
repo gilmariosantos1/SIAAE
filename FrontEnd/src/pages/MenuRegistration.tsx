@@ -74,6 +74,9 @@ export function MenuRegistrationForm() {
           <p className="eyebrow">GESTÃO DE CARDÁPIOS</p>
           <h1>Novo cardápio</h1>
           <p className="menu-registration-intro">Registre a refeição que ficará disponível para as escolas.</p>
+          <IonButton type="button" fill="outline" expand="block" routerLink="/home">
+                Voltar - Página Inicial
+              </IonButton>
           <form className="menu-form" onSubmit={submit}>
             <IonItem>
               <IonLabel position="stacked">Escola</IonLabel>
