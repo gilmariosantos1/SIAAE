@@ -21,15 +21,74 @@ INSERT INTO escolas (nome, codigo_inep, endereco, diretor) VALUES
 ('ESCOLA MUNICIPAL PRESIDENTE DUTRA', '28002024', 'POVOADO LAGOA BONITA, S/N', 'JOSE RONALDO DE JESUS NASCIMENTO');
 
 INSERT INTO turmas (escola_id, nome, etapa_ensino, faixa_etaria, turno) VALUES
-(1, 'Maternal I', 'Educação Infantil - Creche', '0 a 3 anos', 'manhã'),
-(2, 'Maternal I ', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
-(3, 'Maternal II ', 'Educação Infantil - Creche', '0 a 3 anos', 'manhã'),
-(4, 'Maternal II ', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
-(3, 'Pré-Escolar I ', 'Educação Infantil - Creche', '4 a 5 anos', 'manhã');
+(1, 'Berçário I', 'Educação Infantil - Creche', '0 a 3 anos', 'integral'),
+(1, 'Berçário II', 'Educação Infantil - Creche', '0 a 3 anos', 'integral'),
+(1, 'Maternal I', 'Educação Infantil - Creche', '0 a 3 anos', 'integral'),
+(1, 'Maternal II', 'Educação Infantil - Creche', '0 a 3 anos', 'integral'),
+(2, 'Berçário I', 'Educação Infantil - Creche', '0 a 3 anos', 'integral'),
+(2, 'Berçário II', 'Educação Infantil - Creche', '0 a 3 anos', 'integral'),
+(2, 'Maternal I', 'Educação Infantil - Creche', '0 a 3 anos', 'integral'),
+(2, 'Maternal II', 'Educação Infantil - Creche', '0 a 3 anos', 'integral'),
+(3, 'Pré-Escolar I', 'Educação Infantil - Pré-Escolar', '4 a 5 anos', 'manhã'),
+(3, 'Pré-Escolar I', 'Educação Infantil - Pré-Escolar', '4 a 5 anos', 'tarde'),
+(3, 'Pré-Escolar II', 'Educação Infantil - Pré-Escolar', '4 a 5 anos', 'manhã'),
+(3, 'Pré-Escolar II', 'Educação Infantil - Pré-Escolar', '4 a 5 anos', 'tarde'),
+(4, 'Maternal I', 'Educação Infantil - Creche', '0 a 3 anos', 'manhã'),
+(4, 'Maternal II', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
+(5, 'Maternal I', 'Educação Infantil - Creche', '0 a 3 anos', 'manhã'),
+(5, 'Maternal II', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
+(6, 'Maternal I', 'Educação Infantil - Creche', '0 a 3 anos', 'manhã'),
+(6, 'Maternal I', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
+(6, 'Maternal II', 'Educação Infantil - Creche', '0 a 3 anos', 'manhã'),
+(6, 'Maternal II', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
+(7, 'Pré-Escolar I', 'Educação Infantil - Pré-Escolar', '4 a 5 anos', 'integral'),
+(7, 'Pré-Escolar II', 'Educação Infantil - Pré-Escolar', '4 a 5 anos', 'integral');
+
+INSERT INTO turmas (escola_id, nome, etapa_ensino, faixa_etaria, turno) VALUES
+(8, '1º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(8, '1º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde'),
+(8, '2º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(8, '2º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde'),
+(8, '3º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(8, '3º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde'),
+(8, '4º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(8, '4º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde'),
+(8, '5º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(8, '5º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde');,
+(17, '6º Ano', 'Ensino Fundamental - Anos Finais', '12 a 14 anos', 'manhã'),
+(17, '6º Ano', 'Ensino Fundamental - Anos Finais', '12 a 14 anos', 'tarde'),
+(14, '7º Ano', 'Ensino Fundamental - Anos Finais', '12 a 14 anos', 'manhã'),
+(14, '7º Ano', 'Ensino Fundamental - Anos Finais', '12 a 14 anos', 'tarde'),
+(14, '8º Ano', 'Ensino Fundamental - Anos Finais', '12 a 14 anos', 'manhã'),
+(14, '9º Ano', 'Ensino Fundamental - Anos Finais', '12 a 14 anos', 'manhã'),
+(14, '9º Ano', 'Ensino Fundamental - Anos Finais', '12 a 14 anos', 'tarde');
+
+
+
+
+-- escolas com ed. infantil até 5º ano do ensino fundamental
+
+INSERT INTO turmas (escola_id, nome, etapa_ensino, faixa_etaria, turno) VALUES
+(17, 'Maternal II', 'Educação Infantil - Creche', '0 a 3 anos', 'tarde'),
+(17, 'Pré-Escolar I', 'Educação Infantil - Pré-Escolar', '4 a 5 anos', 'integral'),
+(17, 'Pré-Escolar II', 'Educação Infantil - Pré-Escolar', '4 a 5 anos', 'integral'),
+(17, '1º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(17, '1º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde'),
+(17, '2º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(17, '2º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde'),
+(17, '3º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(17, '3º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde'),
+(17, '4º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(17, '4º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde'),
+(17, '5º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'manhã'),
+(17, '5º Ano', 'Ensino Fundamental - Anos Iniciais', '6 a 11 anos', 'tarde');
+
 
 INSERT INTO alunos (turma_id, identificador_anonimo) VALUES
 (1, SHA2('siaae-demo-aluno', 256));
+
 INSERT INTO cardapios (escola_id, dia_semana, etapa_ensino, turno, refeicao, nome_prato, ingredientes) VALUES
 (1, WEEKDAY(CURRENT_DATE) + 1, 'Educação Infantil - Creche', 'manhã', 'Almoço', 'Arroz, feijão e frango assado', 'Arroz, feijão, frango, salada e banana');
+
 INSERT INTO cardapio_ingredientes (cardapio_id, nome) VALUES
 (1, 'Arroz'), (1, 'Feijão'), (1, 'Frango'), (1, 'Salada'), (1, 'Banana');

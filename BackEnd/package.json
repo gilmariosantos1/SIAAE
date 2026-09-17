@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
+    "migrate": "tsx database/createMigration.ts",
     "start": "node dist/server.js"
   },
   "dependencies": {

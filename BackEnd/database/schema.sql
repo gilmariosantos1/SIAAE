@@ -16,7 +16,7 @@ CREATE TABLE turmas (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   escola_id INT UNSIGNED NOT NULL,
   nome VARCHAR(80) NOT NULL,
-  etapa_ensino ENUM('Educação Infantil - Creche','Educação Infantil - Pré-Escolar', '1º Ano', '2º Ano','3º Ano','4º Ano', '5º Ano', '6º Ano', '7º Ano', '8º Ano', '9º Ano', 'EJAEF - Anos Iniciais', 'EJAEF - Anos Finais') NOT NULL,
+  etapa_ensino ENUM('Educação Infantil - Creche','Educação Infantil - Pré-Escolar', 'Ensino Fundamental - Anos Iniciais', 'Ensino Fundamental - Anos Finais', 'EJA - Anos Iniciais', 'EJA - Anos Finais') NOT NULL,
   faixa_etaria VARCHAR(40) NOT NULL,
   turno ENUM('manha', 'tarde', 'noite', 'integral') NOT NULL,
   ativo BOOLEAN NOT NULL DEFAULT TRUE,
@@ -140,5 +140,3 @@ CREATE TABLE logs_acesso (
   criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
--- avaliar inserir etapa de ensino junto ao cardápio, para que seja possível filtrar cardápios por etapa de ensino. 20260030727436
---O protocolo deste atendimento é: 2026-0030727496

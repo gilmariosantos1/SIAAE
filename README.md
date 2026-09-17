@@ -10,9 +10,10 @@ Sistema Integrado de Avaliação da Alimentação Escolar.
 ## Banco de dados
 
 1. Copie `BackEnd/.env.example` para `BackEnd/.env` e preencha as credenciais MySQL.
-2. Execute `BackEnd/database/schema.sql`.
-3. Em uma instalação existente, execute `BackEnd/database/003_cardapios_semanais.sql` para converter a data dos cardápios em dia da semana.
-4. Execute `BackEnd/database/seed.sql` para dados de demonstração.
+2. Execute `npm run migrate` dentro de `BackEnd` para criar o banco e aplicar as migrations pendentes.
+3. Execute `BackEnd/database/seed.sql` para inserir dados de demonstração, se necessário.
+
+O migrador registra cada arquivo em `schema_migrations`, valida seu checksum e aplica migrations numeradas em ordem. O `schema.sql` é o baseline atual; as migrations `002` e `003` são mantidas como histórico e não são reaplicadas sobre esse baseline.
 
 ## Executar a API
 

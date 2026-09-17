@@ -50,7 +50,8 @@ async function startServer() {
 
     app.listen(port, () =>
       console.log(`SIAAE API disponível em http://localhost:${port}`),
-    );
+    );       
+
   } catch (error) {
     console.error("Não foi possível conectar ao banco de dados:", error);
     await pool.end();
